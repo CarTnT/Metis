@@ -129,7 +129,7 @@ class DetectService(object):
         if ret_code != OP_SUCCESS:
             return build_ret_data(ret_code, ret_data)
         ret_code, ret_data = self.detect_obj.value_predict(data)
-        if ret_code == TSD_OP_SUCCESS and ret_data["p"] < 1:
+        if ret_code == TSD_OP_SUCCESS:
             anomaly_params = {
                 "view_id": data["viewId"],
                 "view_name": data["viewName"],
