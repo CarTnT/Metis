@@ -213,8 +213,9 @@ def time_series_periodic_features(data_c_left, data_c_right, data_b_left, data_b
 
     step = DEFAULT_WINDOW / 6
     for w in range(1, DEFAULT_WINDOW, step):
-        periodic_features.append(min(max(data_a[w - 1:w + step]) - data_a[-1], 0))
-        periodic_features.append(max(min(data_a[w - 1:w + step]) - data_a[-1], 0))
+        if len(data_a) > 0 :
+            periodic_features.append(min(max(data_a[w - 1:w + step]) - data_a[-1], 0))
+            periodic_features.append(max(min(data_a[w - 1:w + step]) - data_a[-1], 0))
     return periodic_features
 
 # add yourself fitting features here...
