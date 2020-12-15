@@ -164,6 +164,7 @@ class XGBoosting(object):
             xgb_ret = bst.predict(res_pred)
             if xgb_ret[0] < self.threshold:
                 value = 0
+                print(xgb_ret)
             else:
                 value = 1
             return [value, xgb_ret[0]]
