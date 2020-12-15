@@ -23,7 +23,7 @@ class Detect(object):
         self.polynomial_obj = polynomial_interpolation.PolynomialInterpolation()
         self.statistic_obj = statistic.Statistic()
         self.supervised_obj = xgboosting.XGBoosting()
-        self.arima_obj = arima.Arima()
+        # self.arima_obj = arima.Arima()
 
     def __list_is_digit(self, data):
         for index in data:
@@ -95,14 +95,16 @@ class Detect(object):
             xgb_result = self.supervised_obj.predict(time_series, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
+            if res_value == 0:
+                print(xgb_result)
         else:
             res_value = 1
             prob = 1
-        if res_value == 1:
-            arima_result = self.arima_obj.predict(time_series)
-            if arima_result[0] == 0:
-                res_value = arima_result[3]
-                prob = arima_result[2][0]/arima_result[1]
+        # if res_value == 1:
+        #     arima_result = self.arima_obj.predict(time_series)
+        #     if arima_result[0] == 0:
+        #         res_value = arima_result[3]
+        #         prob = arima_result[2][0]/arima_result[1]
 
         ret_data = {"ret": res_value, "p": str(prob)}
         return TSD_OP_SUCCESS, ret_data
