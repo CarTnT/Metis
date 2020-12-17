@@ -91,12 +91,18 @@ class Detect(object):
         statistic_result = self.statistic_obj.predict(time_series)
         ewma_result = self.ewma_obj.predict(time_series)
         polynomial_result = self.polynomial_obj.predict(time_series, window)
-        if statistic_result == 0 or ewma_result == 0 or polynomial_result == 0 :
-            xgb_result = self.supervised_obj.predict(time_series, window, model_name)
+        if statistic_result != 0 :
+            xgb_result = self.supervised_obj.predict(time_series,statistic_result, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
-            if res_value == 0:
-                print(xgb_result)
+        elif ewma_result != 0:
+            xgb_result = self.supervised_obj.predict(time_series,ewma_result, window, model_name)
+            res_value = xgb_result[0]
+            prob = xgb_result[1]
+        elif polynomial_result != 0:
+            xgb_result = self.supervised_obj.predict(time_series, 0, window, model_name)
+            res_value = xgb_result[0]
+            prob = xgb_result[1]
         else:
             res_value = 1
             prob = 1

@@ -9,6 +9,8 @@ Unless required by applicable law or agreed to in writing, software distributed 
 """
 
 import numpy as np
+from time_series_detector.common.tsd_errorcode import *
+from time_series_detector.common.tsd_common import *
 
 
 class Statistic(object):
@@ -36,6 +38,11 @@ class Statistic(object):
         :param type X: pandas.Series
         :return: 1 denotes normal, 0 denotes abnormal
         """
-        if abs(X[-1] - np.mean(X[:-1])) > self.index * np.std(X[:-1]):
-            return 0
-        return 1
+        data_test = X[-DETECT_WINDOW:]
+        max_diff = self.index * np.std(X[:-1])
+        index = 1
+        for i in range(0,len(data_test)):
+            if abs(data_test[i] - np.mean(X[:-1])) > max_diff:
+                max_diff = abs(data_test[i] - np.mean(X[:-1]))
+                index = i - DETECT_WINDOW
+        return index

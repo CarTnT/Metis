@@ -11,6 +11,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 import numpy as np
 
 DEFAULT_WINDOW = 180
+DETECT_WINDOW = 180
 
 
 def is_standard_time_series(time_series, window=DEFAULT_WINDOW):
@@ -24,8 +25,8 @@ def is_standard_time_series(time_series, window=DEFAULT_WINDOW):
     :return: True or False
     :return type: boolean
     """
+    # return bool(len(time_series) == 5 * window + 3 and np.mean(time_series[(4 * window + 2):]) > 0)
     return bool(len(time_series) == 5 * window + 3 and np.mean(time_series[(4 * window + 2):]) > 0)
-
 
 def split_time_series(time_series, window=DEFAULT_WINDOW):
     """

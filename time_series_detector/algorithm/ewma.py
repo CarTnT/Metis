@@ -9,7 +9,8 @@ Unless required by applicable law or agreed to in writing, software distributed 
 """
 
 import numpy as np
-
+from time_series_detector.common.tsd_errorcode import *
+from time_series_detector.common.tsd_common import *
 
 class Ewma(object):
     """
@@ -45,6 +46,7 @@ class Ewma(object):
         sigma = np.sqrt(np.var(X))
         ucl = s_avg + self.coefficient * sigma * np.sqrt(self.alpha / (2 - self.alpha))
         lcl = s_avg - self.coefficient * sigma * np.sqrt(self.alpha / (2 - self.alpha))
-        if s[-1] > ucl or s[-1] < lcl:
-            return 0
+        for i in range(0, DETECT_WINDOW):
+            if s[-DEFAULT_WINDOW+i] > ucl or s[-1] < lcl:
+                return -DEFAULT_WINDOW+i
         return 1

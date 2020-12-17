@@ -145,7 +145,7 @@ class XGBoosting(object):
             return TSD_TRAIN_ERR, str(ex)
         return TSD_OP_SUCCESS, ""
 
-    def predict(self, X, window=DEFAULT_WINDOW, model_name=DEFAULT_MODEL):
+    def predict(self, X, index, window=DEFAULT_WINDOW, model_name=DEFAULT_MODEL):
         """
         :param X: the time series to detect of
         :type X: pandas.Series
@@ -154,6 +154,7 @@ class XGBoosting(object):
         :return 1 denotes normal, 0 denotes abnormal.
         """
         if is_standard_time_series(X, window):
+            X = X[index:]
             ts_features = []
             features = [10]
             features.extend(feature_service.extract_features(X, window))
