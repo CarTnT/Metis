@@ -101,7 +101,7 @@ class Detect(object):
             xgb_result = self.supervised_obj.predict(time_series,ewma_result, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
-        elif polynomial_result != 0:
+        elif polynomial_result == 0:
             xgb_result = self.supervised_obj.predict(time_series, 0, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
