@@ -127,7 +127,7 @@ class Detect(object):
         #         res_value = arima_result[3]
         #         prob = arima_result[2][0]/arima_result[1]
 
-        ret_data = {"ret": res_value, "p": str(prob), "abnormal_index": index, "count": count, "predict_count": predict}
+        ret_data = {"ret": res_value, "p": str(prob), "abnormal_index": index, "count": str(count), "predict_count": str(predict)}
         return TSD_OP_SUCCESS, ret_data
 
     def rate_predict(self, data):
