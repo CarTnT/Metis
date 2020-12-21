@@ -166,10 +166,10 @@ class XGBoosting(object):
             bst.load_model(model_name)
             xgb_ret = bst.predict(res_pred)
             if xgb_ret[0] < self.threshold:
-                value = index
+                value = 0
                 print(xgb_ret)
             else:
                 value = 1
-            return [value, xgb_ret[0]]
+            return [value, xgb_ret[0], index, X[-1], X[-2]]
         else:
-            return [1, 0]
+            return [1, 0, -1, 0, 0]

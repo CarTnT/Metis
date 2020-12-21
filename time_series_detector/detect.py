@@ -91,30 +91,43 @@ class Detect(object):
         statistic_result = self.statistic_obj.predict(time_series)
         ewma_result = self.ewma_obj.predict(time_series)
         polynomial_result = self.polynomial_obj.predict(time_series, window)
+        index = -1
         if statistic_result != 1:
             print(statistic_result)
             xgb_result = self.supervised_obj.predict(time_series,statistic_result, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
+            index = xgb_result[2]
+            count = xgb_result[3]
+            predict = xgb_result[4]
         elif ewma_result != 1:
             print(ewma_result)
             xgb_result = self.supervised_obj.predict(time_series,ewma_result, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
+            index = xgb_result[2]
+            count = xgb_result[3]
+            predict = xgb_result[4]
         elif polynomial_result != 1:
             xgb_result = self.supervised_obj.predict(time_series, 0, window, model_name)
             res_value = xgb_result[0]
             prob = xgb_result[1]
+            index = xgb_result[2]
+            count = xgb_result[3]
+            predict = xgb_result[4]
         else:
             res_value = 1
             prob = 1
+            index = -1
+            count = 0.0
+            predict = 0.0
         # if res_value == 1:
         #     arima_result = self.arima_obj.predict(time_series)
         #     if arima_result[0] == 0:
         #         res_value = arima_result[3]
         #         prob = arima_result[2][0]/arima_result[1]
 
-        ret_data = {"ret": res_value, "p": str(prob)}
+        ret_data = {"ret": res_value, "p": str(prob), "abnormal_index": index, "count": count, "predict_count": predict}
         return TSD_OP_SUCCESS, ret_data
 
     def rate_predict(self, data):
