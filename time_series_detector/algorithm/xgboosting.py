@@ -29,7 +29,7 @@ class XGBoosting(object):
     """
 
     def __init__(self,
-                 threshold=0.15,
+                 threshold=0.3,
                  max_depth=10,
                  eta=0.05,
                  gamma=0.1,
