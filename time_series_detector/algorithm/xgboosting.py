@@ -154,7 +154,9 @@ class XGBoosting(object):
         :return 1 denotes normal, 0 denotes abnormal.
         """
         if is_standard_time_series(X, window):
-            X = X[index:]
+            if index != 0:
+                X = X[index+1:]+X[:index+1]
+            print(X)
             ts_features = []
             features = [10]
             features.extend(feature_service.extract_features(X, window))
