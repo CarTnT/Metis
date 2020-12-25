@@ -10,7 +10,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 
 import numpy as np
 
-DEFAULT_WINDOW = 180
+DEFAULT_WINDOW = 30
 DETECT_WINDOW = 20
 
 
