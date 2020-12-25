@@ -47,6 +47,6 @@ class Ewma(object):
         ucl = s_avg + self.coefficient * sigma * np.sqrt(self.alpha / (2 - self.alpha))
         lcl = s_avg - self.coefficient * sigma * np.sqrt(self.alpha / (2 - self.alpha))
         for i in range(0, DETECT_WINDOW):
-            if s[-DEFAULT_WINDOW+i] > ucl or s[-1] < lcl:
-                return -DEFAULT_WINDOW+i
+            if s[-DETECT_WINDOW+i] > ucl or s[-1] < lcl:
+                return -DETECT_WINDOW+i
         return 1

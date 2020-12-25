@@ -11,7 +11,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 import numpy as np
 
 DEFAULT_WINDOW = 180
-DETECT_WINDOW = 180
+DETECT_WINDOW = 20
 
 
 def is_standard_time_series(time_series, window=DEFAULT_WINDOW):
