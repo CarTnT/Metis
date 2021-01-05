@@ -23,7 +23,7 @@ class Statistic(object):
     WIKIPEDIA: https://en.wikipedia.org/wiki/68%E2%80%9395%E2%80%9399.7_rule
     """
 
-    def __init__(self, index=3):
+    def __init__(self, index=7):
         """
         :param index: multiple of standard deviation
         :param type: int or float

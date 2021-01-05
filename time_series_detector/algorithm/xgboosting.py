@@ -9,6 +9,7 @@ Unless required by applicable law or agreed to in writing, software distributed 
 """
 
 import os
+import numpy as np
 import xgboost as xgb
 from time_series_detector.feature import feature_service
 from time_series_detector.common.tsd_errorcode import *
@@ -29,7 +30,7 @@ class XGBoosting(object):
     """
 
     def __init__(self,
-                 threshold=0.15,
+                 threshold=0.05,
                  max_depth=10,
                  eta=0.05,
                  gamma=0.1,
@@ -170,6 +171,6 @@ class XGBoosting(object):
                 print(xgb_ret)
             else:
                 value = 1
-            return [value, xgb_ret[0], index, X[-1], X[-2]]
+            return [value, xgb_ret[0], index, X[-1],np.mean(X[:-1])]
         else:
             return [1, 0, -1, 0, 0]
