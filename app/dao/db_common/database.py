@@ -11,5 +11,5 @@ Unless required by applicable law or agreed to in writing, software distributed 
 DB = 'metis'
 USER = 'metis'
 PASSWD = 'metis@123'
-HOST = '127.0.0.1'
+HOST = '172.16.39.92'
 PORT = 3306
