@@ -30,7 +30,7 @@ class XGBoosting(object):
     """
 
     def __init__(self,
-                 threshold=0.05,
+                 threshold=0.3,
                  max_depth=10,
                  eta=0.05,
                  gamma=0.1,
@@ -166,11 +166,11 @@ class XGBoosting(object):
             bst = xgb.Booster({'nthread': 4})
             bst.load_model(model_name)
             xgb_ret = bst.predict(res_pred)
-            if xgb_ret[0] < self.threshold:
+            if xgb_ret[0] < self.threshold and X[-1] > (1+self.threshold) * np.mean(X[:-1]) :
                 value = 0
                 print(xgb_ret)
             else:
                 value = 1
-            return [value, xgb_ret[0], index, X[-1],np.mean(X[:-1])]
+            return [value, xgb_ret[0], index, X[-1], np.mean(X[:-1])]
         else:
             return [1, 0, -1, 0, 0]
