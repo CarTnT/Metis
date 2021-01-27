@@ -156,7 +156,7 @@ class XGBoosting(object):
         """
         if is_standard_time_series(X, window):
             if index != 0:
-                X = X[index+1:]+X[:index+1]
+                X = X[:-DEFAULT_WINDOW]+X[index+1:]+X[-DEFAULT_WINDOW:index+1]
             print(X)
             ts_features = []
             features = [10]
@@ -171,6 +171,6 @@ class XGBoosting(object):
                 print(xgb_ret)
             else:
                 value = 1
-            return [value, xgb_ret[0], index, X[-1], np.mean(X[:-1])]
+            return [value, xgb_ret[0], index, X[-1], np.mean(X[:-1])+3 * np.std(X[:-1])]
         else:
             return [1, 0, -1, 0, 0]
