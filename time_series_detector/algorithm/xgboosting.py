@@ -169,9 +169,9 @@ class XGBoosting(object):
             if xgb_ret[0] < self.threshold and X[-1] > np.mean(X[:-1])+3 * np.std(X[:-1]) :
                 value = 0
             elif X[-1] < np.mean(X[:-1]):
-                return [1, 0, -1, 0, 0]
+                return [1, 1, -1, 0, 0]
             else:
                 value = 1
             return [value, xgb_ret[0], index, X[-1], np.mean(X[:-1])+3 * np.std(X[:-1])]
         else:
-            return [1, 0, -1, 0, 0]
+            return [1, 1, -1, 0, 0]
